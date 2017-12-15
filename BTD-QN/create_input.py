@@ -1,3 +1,4 @@
+__author__ = "Thiago Lopes"
 import os
 from find_xyz_from_a_log import Find_XYZ
 

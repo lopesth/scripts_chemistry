@@ -1,5 +1,5 @@
 # coding=UTF-8
-
+__author__ = "Thiago Lopes"
 from find_a_string_in_file import Find_a_String
 from periodic_table import Convert_Period_Table
 
