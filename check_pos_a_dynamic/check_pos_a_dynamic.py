@@ -5,7 +5,7 @@ __GitHubPage__ = "https://github.com/lopesth"
 __email__ = "lopes.th.o@gmail.com"
 __date__ = "Jan 03 of 2018"
 
-# Description: 
+# Description: Check the positions of the atoms of a certain molecule in a dynamics box
 
 ######################################################################################## 
 
