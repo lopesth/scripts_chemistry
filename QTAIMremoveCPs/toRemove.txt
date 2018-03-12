@@ -1,0 +1,56 @@
+File Name (with path):
+/Users/thiagolopes/Downloads/QTAIM_Epinefrina/QTAIM_Epinefrina_Tuned_LC-wPBE_49000.mgpviz
+
+Remove RCP?
+(X) Yes () No
+
+Remove CCP?
+(X) Yes () No
+
+Atons to remove (with CPs) of AIMALL's mgpviz file (Obs.: 'break line indicates the end of the atons list'):
+O69
+H70
+H71
+O54
+H55
+H56
+O66
+H67
+H68
+O60
+H61
+H62
+O36
+H37
+H38
+O75
+H76
+H77
+O63
+H64
+H65
+O72
+H73
+H74
+O81
+H82
+H83
+O78
+H79
+H80
+O84
+H85
+H86
+O87
+H88
+H89
+O45
+H46
+H47
+O48
+H49
+H50
+O27
+H28
+H29
+
