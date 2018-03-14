@@ -11,6 +11,7 @@ __date__ = "Monday, 12 March 2018"
 #########################################################################################
 # Impoted Modules
 import sys
+from find_a_string_in_file import Find_a_String
 #########################################################################################
 
 # Function Description:  Function for read the input file
@@ -54,22 +55,54 @@ def yesORno(list):
     else:
         return "Error"
 
-# Function Description: Function to remove the RCPs
-def removeRCPs(trueORfalse, fileName):
-    filetoRead = open(fileName, "r")
-    filetoWrite = open(fileName.split(".mgpviz")[0]+"_temp1.mgpviz", "w")
-    filetoWrite.write("/n")
+# Function Description: Function to Separate the CPs from head e footer of AIMALL file
+def separateAIMALLfile(fileName):
+    listofCPs = Find_a_String(listToDo[0] , "CP# ").return_numbers_of_line()
+    listofCPs.append(Find_a_String(listToDo[0] , "Number of ").return_numbers_of_line()[0])
+    file = open(fileName, "r")
+    fileINlist = []
+    for line in file:
+        fileINlist.append(line.split('\n')[0])
+    fileLISThead = fileINlist[0:listofCPs[0]-1]
+    fileLISTfooter = fileINlist[listofCPs[-1]:]
+    fileLISTCPs = fileINlist[listofCPs[0]:listofCPs[-1]-1]
+    return[fileLISThead, fileLISTCPs, fileLISTfooter]
 
-# Function Description: Function to remove the CCPs
-def removeCCPs(trueORfalse, fileName):
-    filetoRead = open(fileName, "r")
-    filetoWrite = open(fileName.split("_temp1.mgpviz")[0]+"_temp2.mgpviz", "w")
-    filetoWrite.write("/n")
+# Function Description: Function to remove the a certain type of CCPs
+def removeCPsTypes(fileLISTCPs, CPtypetoREMOVE):
+    print(CPtypetoREMOVE)
+    listofCPs = []
+    fileLISTCPsnew = []
+    number = 0
+    for element in fileLISTCPs:
+        if "CP# " in element:
+            listofCPs.append(number)
+        number += 1
+    gettedCPs = []
+    anchor = 0
+    for element in range(0, len(listofCPs)-1):
+        if CPtypetoREMOVE in fileLISTCPs[int(listofCPs[element])+1]:
+            startPOS = int(listofCPs[element])
+            for x in fileLISTCPs[anchor:startPOS]:
+                fileLISTCPsnew.append(x)
+            anchor = int(listofCPs[element+1])  
+    return fileLISTCPsnew
+
+P# Function Description: Function to remove the CPs of Selection Atons
+def removeAtomCPs(CPsList, atonsList):
+    print("")
 
 # Function Description: Remove selected CPs
 def removeCPs(listToDo):
-    removeRCPs(listToDo[1], listToDo[0])
-    removeCCPs(listToDo[2], listToDo[0].split(".mgpviz")[0]+"_temp1.mgpviz")
+    fileLISThead, fileLISTCPs, fileLISTfooter = separateAIMALLfile(listToDo[0])
+    if listToDo[1] == True:
+        fileLISTCPs = removeCPsTypes(fileLISTCPs, "RCP")
+    if listToDo[2] == True:
+        fileLISTCPs = removeCPsTypes(fileLISTCPs, "CCP")
+    if len(listToDo[3]) > 0:
+        fileLISTCPs =  removeAtomCPs(fileLISTCPs, listToDo[3])
+    
+
 
 # Description: main function of the script
 if (__name__ == "__main__"):
